@@ -1,0 +1,3 @@
+﻿1.  This is going to relly on Mongo 
+2.  Aspnetcore.healthchecks.MongoDB
+3.  MongoDB.Driver  ==> this enable us to use the mongo in our project
