@@ -31,6 +31,7 @@ public class BasketController :ApiController
 
     #region UpsertBasket
     [HttpPost]
+    [Route("UpsertBasket")]
     [ProducesResponseType(typeof(ShoppingCartResponse), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> UpsertBasket([FromBody] CreateShoppingCartCommand command)
     {
