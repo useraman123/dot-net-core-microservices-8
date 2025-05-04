@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Discount.Application.Command;
 using Discount.Application.Reponses;
 using Discount.Core.Entities;
 
@@ -10,5 +11,9 @@ public class DiscountMappingProfile:Profile
     {
         // Mapper Source -> Destination 
         CreateMap<Coupon, CouponModel>().ReverseMap();
+        CreateMap<CreateDiscountCommand, Coupon>().ReverseMap();
+        CreateMap<CreateDiscountCommand, CouponModel>().ReverseMap();
+        CreateMap<UpdateDiscountCommand, Coupon>().ReverseMap();
+        CreateMap<UpdateDiscountCommand, CouponModel>().ReverseMap();
     }
 }
