@@ -1,3 +1,4 @@
+using Discount.API.ExceptionMiddleware;
 using Discount.API.Services;
 using Discount.Application.Handler;
 using Discount.Core.Repositories;
@@ -38,8 +39,8 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 
-app.UseAuthorization();
-
+//app.UseAuthorization();
+app.UseMiddleware<GlobalExceptionMiddleware>();
 app.UseRouting();
 
 app.UseEndpoints(endpoints =>

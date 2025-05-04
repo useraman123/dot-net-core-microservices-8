@@ -48,7 +48,7 @@ public static class DBExtension
 
                 cmd.CommandText = @"CREATE TABLE Coupon (Id SERIAL PRIMARY KEY,
                             ProductName VARCHAR(100) NOT NULL,
-                            Discription TEXT,
+                            Description TEXT,
                             Amount INT)";
                 cmd.ExecuteNonQuery();
 
