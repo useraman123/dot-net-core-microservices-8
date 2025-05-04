@@ -11,8 +11,18 @@
   </ItemGroup>
 
 	<ItemGroup>
+		<!---For consuming the grpc server begin-->
+		<!--// we have to make this as client grpc to consume the server grpc-->
+		<PackageReference Include="Grpc.AspNetCore" Version="2.71.0" />
+		<!---For consuming the grpc server end-->
 		<PackageReference Include="AutoMapper" Version="13.0.1" />
 		<PackageReference Include="MediatR" Version="12.3.0" />
 	</ItemGroup>
 
+
+	<ItemGroup>
+		<Protobuf Include="..\..\Discount\Discount.Application\Protos\discount.proto" GrpcServices="Client">
+			<Link>Protos\discount.proto</Link>
+		</Protobuf>
+	</ItemGroup>
 </Project>
