@@ -17,11 +17,11 @@
   },
   {
     "Id" : "602d2149e773f2a3990b47f6",
-    "Name": "Adidas Quick Force Indoor Badminton Shoes",
+    "Name": "Adidas Quick Force Outdoor Badminton Shoes",
     "Description": "Designed for professional as well as amateur badminton players. These indoor shoes are crafted with synthetic upper that provides natural fit, while the EVA midsole provides lightweight cushioning. The shoes can be used for Badminton and Squash",
     "Price": 3375,
     "ImageFile": "images/products/adidas_shoe-2.png",
-    "Summary": "Adidas Quick Force Indoor Badminton Shoes",
+    "Summary": "Adidas Quick Force Outdoor Badminton Shoes",
     "Types": {
       "Id": "63ca5d4bc3a8a58f47299f97",
       "Name": "Shoes"
@@ -32,20 +32,20 @@
     } 
   },
   {
-    "Id" : "602d2149e773f2a3990b47f7",
-    "Name": "Adidas Quick Force Indoor Badminton Shoes",
+    "Id": "602d2149e773f2a3990b47f7",
+    "Name": "Adidas Quick Force Indoor-Outdoor Badminton Shoes",
     "Description": "Designed for professional as well as amateur badminton players. These indoor shoes are crafted with synthetic upper that provides natural fit, while the EVA midsole provides lightweight cushioning. The shoes can be used for Badminton and Squash",
     "Price": 3375,
     "ImageFile": "images/products/adidas_shoe-3.png",
-    "Summary": "Adidas Quick Force Indoor Badminton Shoes",
+    "Summary": "Adidas Quick Force Indoor-Outdoor Badminton Shoes",
     "Types": {
       "Id": "63ca5d4bc3a8a58f47299f97",
       "Name": "Shoes"
     },
     "Brands": {
-      "Id":"63ca5e40e0aa3968b549af53",
+      "Id": "63ca5e40e0aa3968b549af53",
       "Name": "Adidas"
-    } 
+    }
   },
   {
     "Id" : "602d2149e773f2a3990b47f8",
