@@ -1,0 +1,13 @@
+﻿we also have to register our grpc into docker override
+
+
+
+basket.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "CacheSetting__ConnectionString=basketdb:6379"
+      - "GrpcSettings__DiscountUrl=http://localhost:8002"--> Grpc resolves from here  (listening to port 8002)
+    depends_on: 
+     - basketdb
+    ports:
+      - "8001:8080"
