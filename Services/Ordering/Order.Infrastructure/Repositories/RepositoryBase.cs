@@ -1,38 +1,49 @@
-﻿using Order.Core.Common;
+﻿using Microsoft.EntityFrameworkCore;
+using Order.Core.Common;
 using Order.Core.Repositories;
+using Order.Infrastructure.Data;
 using System.Linq.Expressions;
 
 namespace Order.Infrastructure.Repositories;
 
 public class RepositoryBase<T> : IAsyncRepository<T> where T : EntityBase
 {
-    public Task<T> AddAsync(T entity)
+    private readonly OrderContext _context;
+    public RepositoryBase(OrderContext context)
     {
-        throw new NotImplementedException();
+        _context=context;
+    }
+    public async Task<T> AddAsync(T entity)
+    {
+        await _context.AddAsync<T>(entity);
+        await _context.SaveChangesAsync();  
+        return entity;
     }
 
-    public Task<T> DeleteAsync(int id)
+    public async Task DeleteAsync(T entity)
     {
-        throw new NotImplementedException();
+        _context.Set<T>().Remove(entity);
+        await _context.SaveChangesAsync();
     }
 
-    public Task<IReadOnlyList<T>> GetAllAsync()
+    public async Task<IReadOnlyList<T>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        return await _context.Set<T>().ToListAsync();
     }
 
-    public Task<IReadOnlyList<T>> GetAllAsync(Expression<Func<T, bool>> predicate)
+    public async Task<IReadOnlyList<T>> GetAllAsync(Expression<Func<T, bool>> predicate)
     {
-        throw new NotImplementedException();
+        return await _context.Set<T>().Where(predicate).ToListAsync();
     }
 
-    public Task<T> GetByIdAsync(int id)
+    public async Task<T> GetByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await _context.Set<T>().FindAsync(id);
     }
 
-    public Task<T> UpdateAsync(T entity)
+    public async Task UpdateAsync(T entity)
     {
-        throw new NotImplementedException();
+        _context.Entry(entity).State = EntityState.Modified;
+        await _context.SaveChangesAsync();
     }
 }
