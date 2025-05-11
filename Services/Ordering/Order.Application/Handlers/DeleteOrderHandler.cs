@@ -10,10 +10,10 @@ namespace Order.Application.Handlers;
 public class DeleteOrderHandler : IRequestHandler<DeleteOrderCommand, Unit>
 {
     private readonly IOrderRepository _repository;
-    private readonly ILogger _logger;
+    private readonly ILogger<DeleteOrderHandler> _logger;
 
 
-    public DeleteOrderHandler(IOrderRepository repository, ILogger logger)
+    public DeleteOrderHandler(IOrderRepository repository, ILogger<DeleteOrderHandler> logger)
     {
         _repository = repository;
         _logger = logger;

@@ -11,8 +11,8 @@ namespace Order.Application.Handlers;
 public class UpdateOrderHandler : IRequestHandler<UpdateOrderCommand, Unit>
 {
     private readonly IOrderRepository _repository;
-    private readonly ILogger _logger;
-    public UpdateOrderHandler(IOrderRepository repository, ILogger logger)
+    private readonly ILogger<UpdateOrderHandler> _logger;
+    public UpdateOrderHandler(IOrderRepository repository, ILogger<UpdateOrderHandler> logger)
     {
         _repository = repository;
         _logger = logger;

@@ -29,8 +29,15 @@ services:
       context: .
       dockerfile: Services/Discount/Discount.API/Dockerfile
 
+  order.api:
+    image: ${DOCKER_REGISTRY-}orderapi
+    build:
+      context: .
+      dockerfile: Services/Ordering/Order.API/Dockerfile
+
 volumes:
   mongo_data:
   postgres_data:
   pgadmin_data:
+
 
