@@ -1,5 +1,7 @@
 using Asp.Versioning;
+using Order.API.DbExtension;
 using Order.Application.Extensions;
+using Order.Infrastructure.Data;
 using Order.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +31,13 @@ builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new Microsoft.OpenApi.M
 
 
 var app = builder.Build();
+
+//Apply Db Migration
+app.MigrateDatabase<OrderContext>((context, services) =>
+{
+    var logger = services.GetService<ILogger<OrderContextSeed>>();
+    OrderContextSeed.SeedAsync(context, logger).Wait();
+});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
