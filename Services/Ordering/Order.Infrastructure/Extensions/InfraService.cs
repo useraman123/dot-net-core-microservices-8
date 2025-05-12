@@ -11,7 +11,7 @@ public static class InfraService
 {
     public static IServiceCollection AddInfrastructureService(this IServiceCollection services,IConfiguration configuration)
     {
-        services.AddDbContext<OrderContext>(option => option.UseSqlServer(configuration.GetConnectionString("OrderConnectionString")));
+        services.AddDbContext<OrderContext>(option => option.UseSqlServer(configuration.GetConnectionString("OrderingConnectionString")));
         services.AddScoped(typeof(IAsyncRepository<>), typeof(RepositoryBase<>));
         services.AddScoped<IOrderRepository, OrderRepository>();
         return services;

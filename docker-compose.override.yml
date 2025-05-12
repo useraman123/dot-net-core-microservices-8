@@ -24,7 +24,17 @@ services:
      - "5432:5432"
     volumes:
      - postgres_data:/var/lib/postgresql/data/
-
+   
+  orderdb:
+    container_name: orderdb
+    environment:
+      SA_PASSWORD: "Aman@123"
+      ACCEPT_EULA: "Y"
+    restart: always
+    ports:
+      - "1433:1433"
+    volumes:
+      - orderdb-data:/var/opt/mssql
 
   pgadmin:
     container_name: pgadmin
@@ -78,9 +88,10 @@ services:
 
 
   order.api:
+    container_name: ordering.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_HTTP_PORTS=8080
+      - "ConnectionStrings__OrderingConnectionString=Server=Anya;Database =OrderDb;TrustServerCertificate=True;Trusted_Connection=True;" 
     ports:
-      - "8080"
+      - "8083:8080"
 

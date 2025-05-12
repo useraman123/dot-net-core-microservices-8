@@ -18,7 +18,9 @@ public class OrderController : ApiController
         _logger = logger;
     }
 
-    [HttpGet("{userName}", Name = "GetOrdersByUserName")]
+    #region GetOrdersByUserName
+    [HttpGet]
+    [Route("[action]/{userName}", Name = "GetOrdersByUserName")]
     [ProducesResponseType(typeof(IEnumerable<OrderResponse>), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<IEnumerable<OrderResponse>>> GetOrdersByUserName(string userName)
     {
@@ -26,15 +28,22 @@ public class OrderController : ApiController
         var orders = await _mediator.Send(query);
         return Ok(orders);
     }
-    //Just for testing 
-    [HttpPost(Name = "CheckoutOrder")]
+    #endregion
+
+    #region CheckoutOrder
+    [HttpPost]
+    [Route("CheckoutOrder")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     public async Task<ActionResult<int>> CheckoutOrder([FromBody] CheckoutOrderCommand command)
     {
         var result = await _mediator.Send(command);
         return Ok(result);
     }
-    [HttpPut(Name = "UpdateOrder")]
+    #endregion
+
+    #region UpdateOrder
+    [HttpPut]
+    [Route("UpdateOrder")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<int>> UpdateOrder([FromBody] UpdateOrderCommand command)
@@ -42,7 +51,12 @@ public class OrderController : ApiController
         var result = await _mediator.Send(command);
         return NoContent();
     }
-    [HttpDelete("{id}", Name = "DeleteOrder")]
+    #endregion
+
+    #region DeleteOrder
+
+    [HttpDelete]
+    [Route("[action]/{id}", Name = "DeleteOrder")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> DeleteOrder(int id)
@@ -51,4 +65,5 @@ public class OrderController : ApiController
         await _mediator.Send(cmd);
         return NoContent();
     }
+    #endregion
 }
