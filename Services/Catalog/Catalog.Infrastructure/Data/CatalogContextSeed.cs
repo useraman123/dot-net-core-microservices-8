@@ -12,9 +12,11 @@ public static class CatalogContextSeed
         bool checkProducts = productsCollection.Find(x => true).Any();
         // path should be constructed using the dynamic setting
         string path = Path.Combine("Data", "SeedData", "products.json");
+        var filepath = @"E:\MicroserviceApp\dot-net-core-microservices-8\Services\Catalog\Catalog.Infrastructure\" + path;
+
         if (!checkProducts)
         {
-            var productsData = File.ReadAllText(path);
+            var productsData = File.ReadAllText(filepath);
             // while deserilazing we are converting the json to the model format
             var product = JsonSerializer.Deserialize<List<Product>>(productsData);
             if (product != null)

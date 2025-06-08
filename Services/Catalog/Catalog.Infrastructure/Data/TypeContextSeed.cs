@@ -12,9 +12,11 @@ public static class TypeContextSeed
         bool checkTypes = typesCollection.Find(x => true).Any();
         // path should be constructed using the dynamic setting
         string path = Path.Combine("Data", "SeedData", "types.json");
+        var filepath = @"E:\MicroserviceApp\dot-net-core-microservices-8\Services\Catalog\Catalog.Infrastructure\" + path;
+
         if (!checkTypes)
         {
-            var typesData = File.ReadAllText(path);
+            var typesData = File.ReadAllText(filepath);
             // while deserilazing we are converting the json to the model format
             var types = JsonSerializer.Deserialize<List<ProductType>>(typesData);
             if (types != null)
