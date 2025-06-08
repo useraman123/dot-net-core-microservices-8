@@ -1,5 +1,6 @@
 ﻿using Catalog.Core.Entities;
 using MongoDB.Driver;
+using System.Reflection;
 using System.Text.Json;
 
 namespace Catalog.Infrastructure.Data;
@@ -12,9 +13,11 @@ public static class BrandContextSeed
         bool checkBrands = brandsCollection.Find(x => true).Any();
         // path should be constructed using the dynamic setting
         string path = Path.Combine("Data", "SeedData", "brands.json");
+        var filepath = @"E:\MicroserviceApp\dot-net-core-microservices-8\Services\Catalog\Catalog.Infrastructure\"+ path;
+
         if (!checkBrands)
         {
-            var brandData = File.ReadAllText(path);
+            var brandData = File.ReadAllText(filepath);
             // while deserilazing we are converting the json to the model format
             var brand = JsonSerializer.Deserialize<List<ProductBrand>>(brandData);
             if (brand != null)
