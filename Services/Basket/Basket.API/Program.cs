@@ -1,4 +1,5 @@
 using Asp.Versioning;
+using Basket.API.ExceptionMiddleware;
 using Basket.Application.GrpcService;
 using Basket.Application.Handler;
 using Basket.Core.Repositories;
@@ -69,7 +70,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseMiddleware<GlobalExceptionMiddleware>();
 app.UseAuthorization();
 
 app.MapControllers();

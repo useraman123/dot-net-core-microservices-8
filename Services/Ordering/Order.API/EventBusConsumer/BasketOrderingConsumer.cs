@@ -5,7 +5,12 @@ using MediatR;
 using Order.Application.Commands;
 
 namespace Order.API.EventBusConsumer;
-
+/// <summary>
+/// Basket is publishing and order is consuming
+/// </summary>
+/// <param name="_mediator"></param>
+/// <param name="_mapper"></param>
+/// <param name="_logger"></param>
 public class BasketOrderingConsumer(
     IMediator _mediator,
     IMapper _mapper,

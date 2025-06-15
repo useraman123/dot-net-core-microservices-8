@@ -60,7 +60,7 @@ public class BasketController(IMediator _mediator, IPublishEndpoint _publish) : 
         {
             return BadRequest();
         }
-        var eventMsg = BasketMapper.Mapper.Map<BasketCheckoutEvent>(basket);
+        var eventMsg = BasketMapper.Mapper.Map<BasketCheckoutEvent>(basketCheckout);
         eventMsg.TotalPrice = basket.TotalPrice;
         //eventMsg.CorrelationId = 
         //publish message via rabbitMQ

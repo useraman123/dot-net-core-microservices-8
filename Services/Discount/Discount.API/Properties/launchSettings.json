@@ -10,7 +10,8 @@
       "dotnetRunMessages": true,
       //this url is just for local debugging for (Browser not of Docker as urs running on docker)
       //docker  http://localhost:8002 check the override
-      "applicationUrl": "http://localhost:5009"
+      //"applicationUrl": "http://localhost:5009"
+      "applicationUrl": "http://localhost:8002"
     },
     "IIS Express": {
       "commandName": "IISExpress",
