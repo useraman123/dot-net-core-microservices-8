@@ -5,16 +5,12 @@ using Discount.Core.Entities;
 using Discount.Core.Repositories;
 using Grpc.Core;
 using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace Discount.Application.Handler;
 
-public class GetDiscountHandler : IRequestHandler<GetDiscountQuery, CouponModel>
+public class GetDiscountHandler(IDiscount _discount, ILogger<GetDiscountHandler> _logger) : IRequestHandler<GetDiscountQuery, CouponModel>
 {
-    private readonly IDiscount _discount;
-    public GetDiscountHandler(IDiscount discount)
-    {
-        _discount = discount;
-    }
     public async Task<CouponModel> Handle(GetDiscountQuery request, CancellationToken cancellationToken)
     {
         var coupon = await _discount.GetDiscount(request.productName);
@@ -23,6 +19,7 @@ public class GetDiscountHandler : IRequestHandler<GetDiscountQuery, CouponModel>
             throw new RpcException(new Status(StatusCode.NotFound, $"Discount for {request.productName} not found"));
         }
         var result = DiscountMapper.Mapper.Map<CouponModel>(coupon);
+        _logger.LogInformation($"Discounted fetched for {request.productName}");
         return result;
     }
 }

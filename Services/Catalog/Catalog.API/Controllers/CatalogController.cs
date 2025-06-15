@@ -8,13 +8,8 @@ using System.Net;
 
 namespace Catalog.API.Controllers;
 
-public class CatalogController : ApiController
+public class CatalogController(IMediator _mediator,ILogger<CatalogController> _logger) : ApiController
 {
-    private readonly IMediator _mediator;
-    public CatalogController(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
 
     #region GetProductById
     [HttpGet]
@@ -38,6 +33,7 @@ public class CatalogController : ApiController
     {
         var query = new GetProductByName(productName);
         var result = await _mediator.Send(query);
+        _logger.LogInformation($"Product {productName} fetched");
         return Ok(result);
     }
     #endregion

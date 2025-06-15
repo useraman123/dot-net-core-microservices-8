@@ -11,7 +11,7 @@ using System.Net;
 
 namespace Basket.API.Controllers;
 
-public class BasketController(IMediator _mediator, IPublishEndpoint _publish) : ApiController
+public class BasketController(IMediator _mediator, IPublishEndpoint _publish,ILogger<BasketController>  _loggger) : ApiController
 {
     #region GetBasketByUserName
     [HttpGet]
@@ -66,6 +66,7 @@ public class BasketController(IMediator _mediator, IPublishEndpoint _publish) : 
         //publish message via rabbitMQ
         //now the message sent to message broker basket task is over now it's ordering API job to consume this message and create order
         await _publish.Publish(eventMsg);
+        _loggger.LogInformation($"Basket publised for {basket.UserName} ");
         //Remove the Basket
         var deleteCommand = new DeleteBasketByUserNameCommand(basketCheckout.UserName);
         await _mediator.Send(deleteCommand);
