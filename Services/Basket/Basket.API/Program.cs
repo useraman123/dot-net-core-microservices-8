@@ -1,9 +1,11 @@
 using Asp.Versioning;
+using Basket.API.ExceptionMiddleware;
 using Basket.Application.GrpcService;
 using Basket.Application.Handler;
 using Basket.Core.Repositories;
 using Basket.Infrastructure.Repositories;
 using Discount.Grpc.Protos;
+using MassTransit;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -50,6 +52,14 @@ builder.Services.AddScoped<DiscountGrpcService>();
 builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>
     (cfg => cfg.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]));
 
+builder.Services.AddMassTransit(config =>
+{
+    config.UsingRabbitMq((ct, cfg) =>
+    {
+        cfg.Host(builder.Configuration["EventBusSettings:HostAddress"]);
+    });
+});
+builder.Services.AddMassTransitHostedService();
 #endregion
 var app = builder.Build();
 
@@ -60,7 +70,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseMiddleware<GlobalExceptionMiddleware>();
 app.UseAuthorization();
 
 app.MapControllers();

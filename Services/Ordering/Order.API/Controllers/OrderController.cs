@@ -31,14 +31,14 @@ public class OrderController : ApiController
     #endregion
 
     #region CheckoutOrder
-    [HttpPost]
-    [Route("CheckoutOrder")]
-    [ProducesResponseType((int)HttpStatusCode.OK)]
-    public async Task<ActionResult<int>> CheckoutOrder([FromBody] CheckoutOrderCommand command)
-    {
-        var result = await _mediator.Send(command);
-        return Ok(result);
-    }
+    //[HttpPost]
+    //[Route("CheckoutOrder")]
+    //[ProducesResponseType((int)HttpStatusCode.OK)]
+    //public async Task<ActionResult<int>> CheckoutOrder([FromBody] CheckoutOrderCommand command)
+    //{
+    //    var result = await _mediator.Send(command);
+    //    return Ok(result);
+    //}
     #endregion
 
     #region UpdateOrder
