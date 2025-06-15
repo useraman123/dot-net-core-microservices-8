@@ -1,15 +1,20 @@
+using Common.Logging;
 using Discount.API.ExceptionMiddleware;
 using Discount.API.Services;
 using Discount.Application.Handler;
 using Discount.Core.Repositories;
 using Discount.Infrastructure.Extension;
 using Discount.Infrastructure.Repositories;
+using Serilog;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
+//serilog configuration
+builder.Host.UseSerilog(Logging.ConfigureLogger);
+
+// Add services to the container.
 //Register AutoMapper
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 //Register Mediator
@@ -40,6 +45,7 @@ if (app.Environment.IsDevelopment())
 }
 
 //app.UseAuthorization();
+app.UseMiddleware<CorrelationIdMiddleware>();
 app.UseMiddleware<GlobalExceptionMiddleware>();
 app.UseRouting();
 

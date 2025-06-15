@@ -1,16 +1,19 @@
 using Asp.Versioning;
-using Asp.Versioning.Routing;
 using Catalog.API.ExceptionMiddleware;
 using Catalog.Application.Handler;
 using Catalog.Core.Repositories;
 using Catalog.Infrastructure.Data;
 using Catalog.Infrastructure.Repositories;
+using Common.Logging;
+using Serilog;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+//serilog configuration
+builder.Host.UseSerilog(Logging.ConfigureLogger);
 
+// Add services to the container.
 builder.Services.AddControllers();
 //API Versioning
 builder.Services.AddApiVersioning(options =>
@@ -52,6 +55,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseMiddleware<CorrelationIdMiddleware>();
 app.UseMiddleware<GlobalExceptionMiddleware>();
 app.UseAuthorization();
 

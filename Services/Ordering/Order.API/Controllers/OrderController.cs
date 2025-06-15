@@ -7,17 +7,9 @@ using System.Net;
 
 namespace Order.API.Controllers;
 
-public class OrderController : ApiController
+public class OrderController(IMediator _mediator, ILogger<OrderController> _logger) : ApiController
 {
-    private readonly IMediator _mediator;
-    private readonly ILogger<OrderController> _logger;
-
-    public OrderController(IMediator mediator, ILogger<OrderController> logger)
-    {
-        _mediator = mediator;
-        _logger = logger;
-    }
-
+   
     #region GetOrdersByUserName
     [HttpGet]
     [Route("[action]/{userName}", Name = "GetOrdersByUserName")]
@@ -26,6 +18,7 @@ public class OrderController : ApiController
     {
         var query = new GetOrderListQuery(userName);
         var orders = await _mediator.Send(query);
+        _logger.LogInformation($"Order for {userName} fetched");
         return Ok(orders);
     }
     #endregion
