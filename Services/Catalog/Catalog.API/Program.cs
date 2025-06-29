@@ -5,6 +5,7 @@ using Catalog.Core.Repositories;
 using Catalog.Infrastructure.Data;
 using Catalog.Infrastructure.Repositories;
 using Common.Logging;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Serilog;
 using System.Reflection;
 
@@ -45,6 +46,14 @@ builder.Services.AddScoped<ITypesRepository, ProductRepository>();
 builder.Services.AddScoped<IBrandRepository, ProductRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
+
+//Identity Server Changes
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.Authority = "https://localhost:44386";
+        options.Audience = "catalog";
+    });
 #endregion
 var app = builder.Build();
 
@@ -57,6 +66,8 @@ if (app.Environment.IsDevelopment())
 }
 app.UseMiddleware<CorrelationIdMiddleware>();
 app.UseMiddleware<GlobalExceptionMiddleware>();
+app.UseRouting();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
