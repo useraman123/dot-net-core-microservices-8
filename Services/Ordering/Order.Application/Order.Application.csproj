@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\EventBus.Messages\EventBus.Messages.csproj" />
+    <ProjectReference Include="..\..\..\Infrastructure\EventBus.Messages\EventBus.Messages.csproj" />
     <ProjectReference Include="..\Order.Core\Order.Core.csproj" />
   </ItemGroup>
 	<ItemGroup>
