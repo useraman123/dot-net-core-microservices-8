@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "Ocelot.ApiGateways": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      //"applicationUrl": "https://localhost:58282;http://localhost:58283"
+      "applicationUrl": "http://localhost:8010;http://localhost:58283"
+    }
+  }
+}
